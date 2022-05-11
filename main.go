@@ -4,12 +4,14 @@ import (
 	"fmt"
 	"log"
 
+	"github.com/RenugaParamalingam/protocol/playftp"
 	"github.com/RenugaParamalingam/protocol/playsftp"
 	"github.com/pkg/sftp"
 )
 
 func main() {
-	playWithSFTP()
+	// playWithSFTP()
+	playWithFTP()
 }
 
 func playWithSFTP() {
@@ -22,6 +24,7 @@ func playWithSFTP() {
 	rawurl := fmt.Sprintf("sftp://%v:%v@%v", sftpUser, sftpPass, sftpHost)
 
 	conn := playsftp.NewConnection(rawurl)
+	defer conn.Close()
 
 	client, err := sftp.NewClient(conn)
 	if err != nil {
@@ -30,4 +33,14 @@ func playWithSFTP() {
 	defer client.Close()
 
 	playsftp.ListDirectory(client)
+}
+
+func playWithFTP() {
+	conn := playftp.NewConnection("192.168.1.8:21", "renugaftp", "password")
+	defer conn.Quit()
+
+	// playftp.ReadFile(conn)
+	playftp.StoreFile(conn)
+
+	// playftp.DeleteFile(conn)
 }
