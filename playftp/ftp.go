@@ -50,5 +50,5 @@ func StoreFile(conn *ftp.ServerConn) {
 }
 
 func DeleteFile(conn *ftp.ServerConn) {
-	conn.Delete("test.txt")
+	conn.Delete("k1.xml")
 }

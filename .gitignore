@@ -1,0 +1,10 @@
+# Generated files
+main
+
+# Misc
+.DS_Store
+*.env
+*.zip
+
+# Vendor
+vendor
